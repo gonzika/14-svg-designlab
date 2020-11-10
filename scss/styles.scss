@@ -1,0 +1,235 @@
+@import 'normalize';
+@import 'var';
+@import "mixins";
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $ff;
+    color: $dark;
+}
+
+html {
+    font-size: 10px;
+    scroll-behavior: smooth; //plawny scroll
+}
+
+body {
+    font: 300 $ff/1.5 1.6rem;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+header {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+h1 {
+    font-size: 5.4rem;
+    margin: 90px 0 40px;
+}
+
+h2 {
+    font-size: 3.4rem;
+    margin: 0 auto 50px;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+.logo {
+    &--light {
+        stroke: $light;
+        fill: $light;
+    }
+
+    &--dark {
+        stroke: $dark;
+        fill: $dark;
+    }
+}
+
+.scroll {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    fill: $light;
+
+    @include hover {
+        fill: $dark;
+    }
+}
+
+.section {
+    padding: 110px 0;
+    text-align: center;
+
+    &--bg {
+        color: $light;
+        background-color: $brand;
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    &__wrap {
+        padding: 30px 120px;
+
+        &--bordered {
+            border: $b-width solid $dark;
+            border-top: 0;
+            position: relative;
+            padding-top: 0;
+
+            &::before, &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                width: 25%;
+                border-top: $b-width solid $dark;
+            }
+
+            .section--bg & {
+                border-color: $light;
+                &::before, &::after {
+                    border-color: $light;
+                }
+            }
+
+            &::before {
+                left: -$b-width; //minus
+            } &::after {
+                right: -$b-width; //minus
+            }
+        }
+    }
+
+    &__title {
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+
+        .section__wrap--bordered & {
+            transform: translate(0, -50%);
+            padding: 0 20%;
+        }
+
+
+    }
+
+    &__subtitle {
+        font-size: 1.5rem;
+        font-weight: 400;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    &__text {
+        font-size: 1.6rem;
+    }
+
+    &__ltext {
+        font-size: 1.4rem;
+        margin-top: 100px;
+        
+        &:nth-last-child(1) {
+            margin-bottom: 70px;
+        }
+
+        & svg {
+            fill: $dark;
+        }
+    }
+}
+
+.btn {
+    text-transform: uppercase;
+    border: $b-width solid $dark;
+    outline: none;
+    background-color: $dark;
+    color: $light;
+    padding: 20px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    width: 100%;
+    max-width: 400px;
+    margin: 30px 0;
+    cursor: pointer;
+
+    @include hover {
+        color: $dark;
+        background-color: $light;
+    }
+}
+
+.copyright {
+    &__text {
+        font-size: 1.4rem;
+        vertical-align: middle;
+    }
+
+    & svg {
+        width: 36px;
+        height: 40px;
+        vertical-align: middle;
+    }
+}
+
+.portfolio {
+    display: grid;
+    grid-template-columns: 30% auto 30%; //1fr 1.2fr 1fr
+    grid-template-rows: repeat(2, 230px); //230px 230px
+    grid-gap: 10px;
+
+
+    &__item {
+        position: relative;
+        overflow: hidden;
+        @include hover {
+            .portfolio__img {
+                @include tr;
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            .portfolio__name {
+                @include tr;
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    &__img {
+        @include pCenter;
+        @include tr;
+        min-width: 100%;
+        min-height: 100%;
+       
+    }
+
+    &__name {
+        @include tr;
+        text-transform: uppercase;
+        position: absolute;
+        z-index: 10;
+        color: #ffffff;
+        font-size: 34px;
+        left: 60px;
+        right: 60px;
+        bottom: 40px;
+        font-weight: 700;
+        letter-spacing: .16;
+    }
+
+
+}
